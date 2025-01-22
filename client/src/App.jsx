@@ -1,6 +1,6 @@
 import React from 'react';
 const App = () => {
-    return <div>Hello World!</div>
+    return <div>Cronkite Electric's website - currently in development</div>
 };
 
 export default App;
