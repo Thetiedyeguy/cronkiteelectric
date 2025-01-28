@@ -1,0 +1,107 @@
+.container {
+    font-family: 'Schadow BLK BT', Arial, sans-serif;
+    color: #333;
+    background-color: #fdfdfd;
+    margin: 0 auto;
+    padding: 0 16px;
+    max-width: 1200px;
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  
+  .logo {
+    width: 0%;
+    height: 10%;
+    margin: 0 auto;
+  }
+  
+  .title {
+    font-size: 3rem;
+    color: #f4c500; /* Yellow matching the text on the logo */
+    margin: 16px 0;
+  }
+  
+  .tagline {
+    font-size: 1.25rem;
+    color: #0056b3; /* Blue matching the shirt */
+  }
+  
+  .main {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    background-color: #ffffff;
+  }
+  
+  .about, .services, .contact {
+    background: #f9f9f9;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .about h2, .services h2, .contact h2 {
+    color: #f4c500;
+    margin-bottom: 16px;
+  }
+  
+  ul {
+    list-style-type: square;
+    padding-left: 20px;
+  }
+  
+  ul li {
+    margin: 8px 0;
+  }
+  
+  .contactButton {
+    background-color: #0056b3;
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .contactButton:hover {
+    background-color: #003f7f;
+  }
+  
+  .footer {
+    text-align: center;
+    margin-top: 32px;
+    padding: 16px;
+    background: #333333; /* Black matching the logo circle */
+    color: #ffffff;
+    border-radius: 8px;
+  }
+  
+  a {
+    color: #0056b3;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  .contactButton {
+    background-color: #0056b3;
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .contactButton:hover {
+    background-color: #003f7f;
+  }
+  

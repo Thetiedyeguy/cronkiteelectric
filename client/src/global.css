@@ -1,0 +1,15 @@
+@font-face {
+    font-family: 'Schadow BLK BT';
+    src: url('/fonts/schadow-blk-bt.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  body {
+    font-family: 'Schadow BLK BT', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+    color: #333;
+  }
+  

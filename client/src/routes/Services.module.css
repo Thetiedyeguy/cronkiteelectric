@@ -1,0 +1,49 @@
+.container {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    background-color: #fdfdfd;
+    margin: 0 auto;
+    padding: 16px;
+    max-width: 1200px;
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+    color: #f4c500; /* Yellow text from logo */
+    margin-bottom: 8px;
+  }
+  
+  .subtitle {
+    font-size: 1.25rem;
+    color: #0056b3; /* Blue from logo */
+  }
+  
+  .main {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .service {
+    background: #f9f9f9;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .serviceTitle {
+    font-size: 1.5rem;
+    color: #f4c500; /* Yellow text from logo */
+    margin-bottom: 8px;
+  }
+  
+  .serviceDescription {
+    font-size: 1rem;
+    color: #333;
+  }
+  
