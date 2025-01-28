@@ -26,6 +26,7 @@ app.get('/api/reviews', async (req, res) => {
     const response = await axios.get(
       `https://places.googleapis.com/v1/places/ChIJ39mHPz-nFYcRxvfKtEg_XrU?fields=reviews&key=${apiKey}`,
     );
+    console.log(apiKey);
     console.log(response.data.reviews);
     res.json(response.data.reviews);
   } catch (error) {
