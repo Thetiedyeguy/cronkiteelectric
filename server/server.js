@@ -1,4 +1,5 @@
-require("dotenv").config("~/.env");
+const path = require('path');
+require("dotenv").config({ path: path.resolve(__dirname, '.env') });
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
@@ -21,10 +22,12 @@ app.listen(port,() => {
 
 app.get('/api/reviews', async (req, res) => {
   const apiKey = process.env.GOOGLE_API_KEY; // Store your API key in an environment variable
+  // Add this right after loading dotenv
+  console.log("Google API Key:", process.env.GOOGLE_API_KEY ? "Loaded" : "Missing");
 
   try {
     const response = await axios.get(
-      `https://places.googleapis.com/v1/places/ChIJ39mHPz-nFYcRxvfKtEg_XrU?fields=reviews&key=AIzaSyCcQqsXyoj_zdLSdB5zNl3zDihtXjMiy14`,
+      `https://places.googleapis.com/v1/places/ChIJ39mHPz-nFYcRxvfKtEg_XrU?fields=reviews&key=${process.env.GOOGLE_API_KEY}`,
     );
     res.json(response.data.reviews);
   } catch (error) {
