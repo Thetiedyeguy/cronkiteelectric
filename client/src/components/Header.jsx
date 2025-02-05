@@ -17,7 +17,6 @@ const Header = () => {
           <Link to="/" className={styles.logoLink}>
             <img src="/big logo.png" alt="Cronkite Electric Logo" className={styles.logo} />
           </Link>
-          <h1 className={styles.title}>Cronkite Electric</h1>
         </div>
         <nav className={styles.nav}>
           <ul className={styles.navList}>

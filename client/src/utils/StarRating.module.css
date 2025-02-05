@@ -1,0 +1,17 @@
+/* client/src/components/StarRating.module.css */
+.ratingContainer {
+    display: inline-flex;
+    gap: 2px;
+  }
+  
+  .star {
+    font-size: 1.2rem;
+  }
+  
+  .filled {
+    color: #ffd700; /* Gold color for filled stars */
+  }
+  
+  .empty {
+    color: #d3d3d3; /* Light gray for empty stars */
+  }

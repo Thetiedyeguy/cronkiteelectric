@@ -58,3 +58,11 @@
   color: #666;
   margin-top: 4px;
 }
+
+/* Add these to your existing Reviews.module.css */
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0.5rem 0;
+}

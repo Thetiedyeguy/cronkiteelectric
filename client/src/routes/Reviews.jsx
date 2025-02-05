@@ -1,18 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Reviews.module.css';
 import ReviewFinder from '../apis/ReviewFinder';
+import StarRating from '../utils/StarRating';
+import LoadingSpinner from '../components/LoadingSpinner';
+import ErrorBanner from '../components/ErrorBanner';
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchReviews = async () => {
       try {
+        setIsLoading(true);
         const response = await ReviewFinder.get('/');
-        // Ensure the data format is consistent
-        setReviews(response.data || []); // Assuming response.data contains the reviews array
-      } catch (error) {
-        console.error('Error fetching reviews:', error);
+        setReviews(response.data || []);
+      } catch (err) {
+        setError('Failed to load reviews. Please try again later.');
+        console.error('Error:', err);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -24,7 +32,13 @@ const Reviews = () => {
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Customer Reviews</h2>
-      {reviews.length > 0 ? (
+      {isLoading ? (
+        <LoadingSpinner /> // Create this component
+      ) : error ? (
+        <ErrorBanner 
+        message={error}
+        />
+      ) : reviews.length > 0 ? (
         reviews.map((review, index) => (
           <div key={index} className={styles.review}>
             <div className={styles.authorSection}>
@@ -42,7 +56,10 @@ const Reviews = () => {
                 {review.authorAttribution?.displayName || 'Anonymous'}
               </a>
             </div>
-            <p className={styles.rating}>Rating: {review.rating} / 5</p>
+            <div className={styles.rating}>
+              <StarRating rating={review.rating} />
+              <span>({review.rating}/5)</span>
+            </div>
             <p className={styles.text}>{review.text?.text || 'No review text provided.'}</p>
             <p className={styles.time}>{review.relativePublishTimeDescription}</p>
           </div>
