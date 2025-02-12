@@ -1,39 +1,64 @@
-import React, {useState} from 'react';
-import { Link } from 'react-router-dom'; // Import Link for navigation
+import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import styles from './Header.module.css';
 import ContactModal from './ContactModal';
 
 const Header = () => {
-
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+  const location = useLocation();
 
   return (
-    <div>
-      <header className={styles.header}>
-        <div className={styles.logoContainer}>
-          <Link to="/" className={styles.logoLink}>
-            <img src="/big logo.png" alt="Cronkite Electric Logo" className={styles.logo} />
-          </Link>
-        </div>
-        <nav className={styles.nav}>
-          <ul className={styles.navList}>
-            <li>
-              <Link to="/services" className={styles.navLink}>Services</Link>
+    <header className={styles.header}>
+      <div className={styles.headerContainer}>
+        {/* Logo Section */}
+        <Link to="/" className={styles.logoLink} aria-label="Home">
+          <img 
+            src="/big logo.png" 
+            alt="Cronkite Electric Logo" 
+            className={styles.logo}
+            loading="lazy"
+          />
+        </Link>
+
+        {/* Navigation */}
+        <nav className={styles.nav} aria-label="Main navigation">
+          <ul className={styles.navList} role="list">
+            <li className={styles.navItem}>
+              <Link
+                to="/services"
+                className={`${styles.navLink} ${
+                  location.pathname === '/services' ? styles.active : ''
+                }`}
+                aria-current={location.pathname === '/services' ? 'page' : undefined}
+              >
+                Services
+              </Link>
             </li>
-            <li>
-              <Link to="/about" className={styles.navLink}>About Us</Link>
+            <li className={styles.navItem}>
+              <Link
+                to="/about"
+                className={`${styles.navLink} ${
+                  location.pathname === '/about' ? styles.active : ''
+                }`}
+                aria-current={location.pathname === '/about' ? 'page' : undefined}
+              >
+                About
+              </Link>
             </li>
-            <li>
-              <Link onClick={openModal} className={styles.navLink}>Contact Us</Link>
+            <li className={styles.navItem}>
+              <button
+                className={styles.navButton}
+                onClick={() => setIsModalOpen(true)}
+                aria-label="Open contact form"
+              >
+                Contact
+              </button>
             </li>
           </ul>
         </nav>
-      </header>
-      <ContactModal isOpen={isModalOpen} onClose={closeModal} />
-    </div>
+      </div>
+      <ContactModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+    </header>
   );
 };
 
