@@ -67,25 +67,25 @@ function splitMessage(message) {
 
 // API endpoint
 app.post('/api/send-message', express.json(), async (req, res) => {
-  const { name, message } = req.body;
+  const { name, contact, message } = req.body;
   console.log("Submitted")
 
   try {
     // Honeypot check
     
     // Validate input
-    if (!name || !message) throw new Error('Missing required fields');
+    if (!name || !message || !contact) throw new Error('Missing required fields');
     if (message.length > 1000) throw new Error('Message too long');
 
     // Split message
-    const chunks = splitMessage(`From ${name}: ${message}`);
+    const chunks = splitMessage(`Contact ${contact}\n: ${message}`);
     
     // Send each chunk as separate email
     for (const [index, chunk] of chunks.entries()) {
       await transporter.sendMail({
         from: `"Website Contact" <${process.env.GMAIL_USER}>`,
         to: `${TARGET_PHONE}${CARRIER_GATEWAY}`,
-        subject: index === 0 ? 'New Message' : `(Part ${index + 1})`,
+        subject: index === 0 ? `New Message From ${name}` : `(Part ${index + 1})`,
         text: chunk
       });
     }

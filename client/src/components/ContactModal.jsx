@@ -15,6 +15,7 @@ const ContactModal = ({ isOpen, onClose }) => {
     try {
       await Contact.post(`/`, {
         name,
+        contact,
         message,
       });
       
@@ -84,7 +85,7 @@ const ContactModal = ({ isOpen, onClose }) => {
               disabled={isSending}
               className={styles.submitButton}
             >
-              {isSending ? 'Sending...' : 'Send Text'}
+              {isSending ? 'Sending...' : 'Send'}
             </button>
           </form>
         )}
