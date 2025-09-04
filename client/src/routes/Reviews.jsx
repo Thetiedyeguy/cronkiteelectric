@@ -5,7 +5,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import ErrorBanner from '../components/ErrorBanner';
 import StarRating from '../utils/StarRating';
 
-const Reviews = () => {
+const Reviews = ({label = 'Warning'}) => {
   const [reviews, setReviews] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -52,7 +52,7 @@ const Reviews = () => {
                         loading="lazy"
                       />
                     ) : (
-                      <div className={styles.defaultAvatar}>👤</div>
+                      <span className={styles.defaultAvatar} role="img" aria-label={label}>👤</span>
                     )}
                   </div>
                   <div className={styles.authorInfo}>

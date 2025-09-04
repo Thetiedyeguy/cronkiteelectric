@@ -6,6 +6,11 @@ import ContactModal from './ContactModal';
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const location = useLocation();
+  const phoneNumber = '2097023370';
+
+  const handlePhoneClick = () => {
+    window.location.href = `tel:${phoneNumber}`;
+  };
 
   return (
     <header className={styles.header}>
@@ -22,7 +27,14 @@ const Header = () => {
 
         {/* Navigation */}
         <nav className={styles.nav} aria-label="Main navigation">
-          <ul className={styles.navList} role="list">
+          <ul className={styles.navList}>
+            <li className={styles.navItem}>
+              <Link 
+                className={styles.navLink}
+                onClick={handlePhoneClick}
+                aria-label="Call us"
+              >(209)702-3370</Link>
+            </li>
             <li className={styles.navItem}>
               <Link
                 to="/services"

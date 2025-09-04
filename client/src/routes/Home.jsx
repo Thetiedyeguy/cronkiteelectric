@@ -11,8 +11,8 @@ const Home = () => {
   // Services data array for better maintainability
   const services = [
     {
-      title: 'Wiring & Rewiring',
-      description: 'Comprehensive solutions for homes and businesses',
+      title: 'Additional power',
+      description: '',
       icon: '⚡'
     },
     {
@@ -21,12 +21,12 @@ const Home = () => {
       icon: '🔌'
     },
     {
-      title: 'Maintenance',
-      description: 'Preventative system care',
+      title: 'Troubleshooting',
+      description: '',
       icon: '🔧'
     },
     {
-      title: 'Lighting Solutions',
+      title: 'Fixture Installation',
       description: 'Energy-efficient designs',
       icon: '💡'
     }
@@ -58,7 +58,7 @@ const Home = () => {
       <header className={styles.hero}>
         <div className={styles.heroContent}>
           <h1 className={styles.title}>Cronkite Electric</h1>
-          <p className={styles.tagline}>Reliable, Professional Electrical Services</p>
+          <p className={styles.tagline}>Grounded in Quality, Powered by trust</p>
         </div>
       </header>
 
@@ -70,9 +70,7 @@ const Home = () => {
           <h2 id="about-heading" className={styles.sectionHeading}>About Us</h2>
           <div className={styles.aboutContent}>
             <p>
-              Licensed and insured, Cronkite Electric delivers top-tier electrical solutions 
-              with a focus on safety and customer satisfaction. Serving both residential 
-              and commercial clients.
+              My goal with my company is to provide trustworthy services for all customers so i can afford a lifestyle where i am able to spend quality time with friends and family.
             </p>
           </div>
         </section>
@@ -87,7 +85,6 @@ const Home = () => {
               <li key={index} className={styles.serviceCard}>
                 <div className={styles.serviceIcon}>{service.icon}</div>
                 <h3 className={styles.serviceTitle}>{service.title}</h3>
-                <p className={styles.serviceDescription}>{service.description}</p>
               </li>
             ))}
           </ul>
@@ -104,21 +101,21 @@ const Home = () => {
               onClick={handlePhoneClick}
               aria-label="Call us"
             >
-              📞 Call Us
+              <span role='img' aria-label='Phone'>📞</span> Call Us
             </button>
             <button
               className={styles.contactButton}
               onClick={handleEmailClick}
               aria-label="Email us"
             >
-              ✉️ Email Us
+              <span role='img' aria-label='Email'>✉️</span> Email Us
             </button>
             <button 
               className={styles.contactButton}
               onClick={() => setIsModalOpen(true)}
               aria-label="Request a quote"
             >
-              📋 Get Quote
+              <span role='img' aria-label='Clipboard'>📋</span> Get Quote
             </button>
           </div>
         </section>
@@ -129,7 +126,7 @@ const Home = () => {
       <footer className={styles.footer}>
         <p className={styles.footerText}>
           &copy; {new Date().getFullYear()} Cronkite Electric. All rights reserved.<br />
-          License #123456 | Fully Insured
+          License #113063 | Fully Insured
         </p>
       </footer>
 

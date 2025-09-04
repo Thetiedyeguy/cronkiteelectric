@@ -4,7 +4,6 @@ import Home from './routes/Home';
 import Header from './components/Header';
 import Services from './routes/Services';
 import AboutUs from './routes/AboutUs';
-import Reviews from './routes/Reviews';
 
 const App = () => {
   return (

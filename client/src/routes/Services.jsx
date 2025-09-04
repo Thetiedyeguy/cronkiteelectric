@@ -10,32 +10,33 @@ const Services = () => {
   const services = [
     {
       title: "Electrical Installations",
-      description: "Complete wiring solutions for residential and commercial properties",
-      icon: "⚡",
+      description: "",
+      icon: "🔌",
       details: [
         "Full home rewiring",
-        "Circuit breaker installations",
-        "Lighting system upgrades"
+        "Fixture installations",
+        "Lighting upgrades"
       ]
     },
     {
-      title: "System Maintenance",
-      description: "Preventative care for optimal electrical performance",
+      title: "Troubleshooting",
+      description: "",
       icon: "🔧",
       details: [
-        "Safety inspections",
-        "Load testing",
-        "Panel upgrades"
+        "Repair non working circuits",
+        "Inspect electrical systems",
+        "Bring systems up to code"
       ]
     },
     {
-      title: "Energy Solutions",
-      description: "Eco-friendly electrical upgrades",
-      icon: "💡",
+      title: "Additional Power",
+      description: "",
+      icon: "⚡",
       details: [
-        "LED lighting conversions",
-        "Solar panel integration",
-        "Smart home automation"
+        "Panel Upgrades",
+        "Additional",
+        "Convenience outlets",
+        "Car charger"
       ]
     }
   ];
@@ -63,7 +64,6 @@ const Services = () => {
                 <span className={styles.serviceIcon}>{service.icon}</span>
                 <h3 className={styles.serviceTitle}>{service.title}</h3>
               </div>
-              <p className={styles.serviceDescription}>{service.description}</p>
               <ul className={styles.serviceDetails}>
                 {service.details.map((detail, i) => (
                   <li key={i} className={styles.detailItem}>{detail}</li>

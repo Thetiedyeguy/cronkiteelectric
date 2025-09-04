@@ -19,7 +19,7 @@ const AboutUs = () => {
     },
     { 
       icon: '🎓', 
-      title: 'Latest Training', 
+      title: 'Code enforced installs', 
       text: '2023 Certified Electrical Safety Professional (CESCP)'
     },
     { 
@@ -55,8 +55,7 @@ const AboutUs = () => {
             <ul className={styles.commitmentList}>
               <li>Direct communication with the business owner</li>
               <li>Same-day quotes for urgent needs</li>
-              <li>No subcontractors or crew delays</li>
-              <li>100% attention to your project</li>
+              <li>personalized attention to your project</li>
             </ul>
           </div>
         </div>
@@ -80,7 +79,7 @@ const AboutUs = () => {
             className={styles.ctaButton}
             onClick={() => setIsModalOpen(true)}
           >
-            Get Free Same-Day Estimate
+            Get Free Unchanging Estimates
           </button>
         </div>
       </div>

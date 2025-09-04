@@ -21,19 +21,65 @@ app.listen(port,() => {
 
 
 
+const CACHE_TTL_HOURS = Number(process.env.REVIEWS_TTL_HOURS || 24);
+const CACHE_TTL_MS = CACHE_TTL_HOURS * 60 * 60 * 1000;
+
+let reviewsCache = {
+  data: null,        // will hold the reviews array
+  fetchedAt: 0,      // Date.now() when fetched
+};
+let reviewsFetchPromise = null; // reuse in-flight fetches
+
+// ---- replace your /api/reviews route with this ----
 app.get('/api/reviews', async (req, res) => {
-  const apiKey = process.env.GOOGLE_API_KEY; // Store your API key in an environment variable
-  // Add this right after loading dotenv
-  console.log("Google API Key:", process.env.GOOGLE_API_KEY ? "Loaded" : "Missing");
+  const apiKey = process.env.GOOGLE_API_KEY;
+  if (!apiKey) return res.status(500).json({ error: 'Missing GOOGLE_API_KEY' });
+
+  const forceRefresh = req.query.refresh === '1';
+  const isFresh = reviewsCache.data && (Date.now() - reviewsCache.fetchedAt) < CACHE_TTL_MS;
+
+  // Serve from cache if fresh and not forced to refresh
+  if (!forceRefresh && isFresh) {
+    return res.json(reviewsCache.data);
+  }
 
   try {
-    const response = await axios.get(
-      `https://places.googleapis.com/v1/places/ChIJ39mHPz-nFYcRxvfKtEg_XrU?fields=reviews&key=${process.env.GOOGLE_API_KEY}`,
-    );
-    res.json(response.data.reviews);
-  } catch (error) {
-    console.error('Error fetching Google Reviews:', error);
-    res.status(500).json({ error: 'Failed to fetch reviews' });
+    // If a fetch is already in-flight, await it instead of starting another
+    if (!reviewsFetchPromise) {
+      const placeId = 'ChIJ39mHPz-nFYcRxvfKtEg_XrU';
+      const url = `https://places.googleapis.com/v1/places/${placeId}`;
+
+      reviewsFetchPromise = axios.get(url, {
+        headers: {
+          'X-Goog-Api-Key': apiKey,
+          'X-Goog-FieldMask': 'reviews' // request only what you need
+        },
+        timeout: 10000
+      })
+      .then(resp => {
+        const reviews = resp.data?.reviews || [];
+        reviewsCache = { data: reviews, fetchedAt: Date.now() };
+        return reviews;
+      })
+      .catch(err => {
+        const status = err.response?.status;
+        const data = err.response?.data;
+        console.error('Places API error:', status, JSON.stringify(data));
+        // If we have stale cache, return it as a fallback
+        if (reviewsCache.data) return reviewsCache.data;
+        // Otherwise surface the error
+        throw new Error(data?.error?.message || 'Failed to fetch reviews');
+      })
+      .finally(() => {
+        // small delay to ensure .finally runs after consumers read it
+        setTimeout(() => { reviewsFetchPromise = null; }, 0);
+      });
+    }
+
+    const result = await reviewsFetchPromise;
+    return res.json(result);
+  } catch (e) {
+    return res.status(500).json({ error: e.message || 'Failed to fetch reviews' });
   }
 });
 
