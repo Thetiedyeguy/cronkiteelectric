@@ -50,7 +50,7 @@ const Home = () => {
   return (
     <div className={styles.container}>
       <GiveawayBanner
-        description="Enter our monthly giveaway for a chance to win $100 service credit and Cronkite Electric merch!"
+        description="Enter our giveaway for a chance to win a free outlet upgrade."
         onSubmit={submitGiveaway}
       />
       {/* Schema markup for SEO */}
