@@ -30,6 +30,91 @@ let reviewsCache = {
 };
 let reviewsFetchPromise = null; // reuse in-flight fetches
 
+// --- config (put near other env usages) ---
+const ADMIN_TOKEN = process.env.ADMIN_TOKEN; // set e.g. ADMIN_TOKEN=supersecret in your .env
+
+function requireAdmin(req, res, next) {
+  const token = req.get('x-admin-token') || req.query.token;
+  if (ADMIN_TOKEN && token === ADMIN_TOKEN) return next();
+  return res.status(401).json({ error: 'Unauthorized' });
+}
+
+// --- create (already matches your GiveawayBanner.jsx default) ---
+app.post('/api/giveaway/entry', async (req, res) => {
+  try {
+    const { name, phone } = req.body || {};
+    const cleanName = (name || '').trim();
+    const cleanPhone = (phone || '').trim();
+
+    if (!cleanName || !cleanPhone) {
+      return res.status(400).json({ error: 'Name and phone are required.' });
+    }
+
+    // simple server-side length guards
+    if (cleanName.length > 100 || cleanPhone.length > 30) {
+      return res.status(400).json({ error: 'Input too long.' });
+    }
+
+    const result = await db.query(
+      `INSERT INTO giveaway_entries (name, phone) VALUES ($1, $2)
+       RETURNING id, name, phone, created_at`,
+      [cleanName, cleanPhone]
+    );
+
+    res.status(201).json(result.rows[0]);
+  } catch (err) {
+    console.error('POST /api/giveaway-entry', err);
+    res.status(500).json({ error: 'Failed to save entry.' });
+  }
+});
+
+// --- list (admin) ---
+app.get('/api/giveaway/entries', requireAdmin, async (req, res) => {
+  try {
+    const result = await db.query(
+      `SELECT id, name, phone, created_at
+       FROM giveaway_entries
+       ORDER BY created_at DESC`
+    );
+    res.json(result.rows);
+  } catch (err) {
+    console.error('GET /api/giveaway-entries', err);
+    res.status(500).json({ error: 'Failed to fetch entries.' });
+  }
+});
+
+// --- csv export (admin; handy for drawings) ---
+app.get('/api/giveaway/entries.csv', requireAdmin, async (req, res) => {
+  try {
+    const result = await db.query(
+      `SELECT id, name, phone, created_at
+       FROM giveaway_entries
+       ORDER BY created_at DESC`
+    );
+    const rows = result.rows;
+
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+    res.setHeader('Content-Disposition', 'attachment; filename="giveaway_entries.csv"');
+
+    // simple CSV builder
+    res.write('id,name,phone,created_at\n');
+    for (const r of rows) {
+      const line = [
+        r.id,
+        JSON.stringify(r.name),  // quote if needed
+        JSON.stringify(r.phone),
+        r.created_at.toISOString()
+      ].join(',');
+      res.write(line + '\n');
+    }
+    res.end();
+  } catch (err) {
+    console.error('GET /api/giveaway-entries.csv', err);
+    res.status(500).json({ error: 'Failed to export CSV.' });
+  }
+});
+
+
 // ---- replace your /api/reviews route with this ----
 app.get('/api/reviews', async (req, res) => {
   const apiKey = process.env.GOOGLE_API_KEY;

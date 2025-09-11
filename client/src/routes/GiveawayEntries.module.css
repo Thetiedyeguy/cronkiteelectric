@@ -1,0 +1,10 @@
+.container { max-width: 960px; margin: 2rem auto; padding: 0 1rem; }
+.title { font-size: 1.75rem; margin-bottom: 1rem; }
+.actions { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+.csvBtn { background: #1e3a8a; color:#fff; padding: 0.5rem 0.85rem; border-radius: 8px; text-decoration: none; }
+.csvBtn:hover { filter: brightness(1.05); }
+.note { color:#4b5563; margin:0; }
+.error { color:#b91c1c; }
+.table { width: 100%; border-collapse: collapse; }
+.table th, .table td { border: 1px solid #e5e7eb; padding: 0.5rem 0.6rem; text-align: left; }
+.table thead th { background: #f3f4f6; }

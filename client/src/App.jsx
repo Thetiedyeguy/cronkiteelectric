@@ -4,6 +4,7 @@ import Home from './routes/Home';
 import Header from './components/Header';
 import Services from './routes/Services';
 import AboutUs from './routes/AboutUs';
+import GiveawayEntries from './routes/GiveawayEntries';
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
                 <Route path="/" element={<Home />} />
                 <Route path='/services' element={<Services/>}/>
                 <Route path='/about' element={<AboutUs/>}/>
+                <Route path='/submissions' element={<GiveawayEntries/>}/>
             </Routes>
         </Router>
     </div>

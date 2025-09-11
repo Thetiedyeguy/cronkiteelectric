@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import ContactModal from '../components/ContactModal';
+import GiveawayBanner from "../components/GiveawayBanner";
 import styles from './Home.module.css';
 import Reviews from './Reviews';
+import api from '../apis/Giveaway';
 
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -40,8 +42,17 @@ const Home = () => {
     window.location.href = `mailto:${email}`;
   };
 
+  const submitGiveaway = async ({ name, phone }) => {
+    const resp = await api.post("/entry", { name, phone });
+    return { ok: resp.status >= 200 && resp.status < 300 };
+  };
+
   return (
     <div className={styles.container}>
+      <GiveawayBanner
+        description="Enter our monthly giveaway for a chance to win $100 service credit and Cronkite Electric merch!"
+        onSubmit={submitGiveaway}
+      />
       {/* Schema markup for SEO */}
       <script type="application/ld+json">
         {JSON.stringify({
