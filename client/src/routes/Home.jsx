@@ -78,10 +78,10 @@ const Home = () => {
           className={styles.aboutSection}
           aria-labelledby="about-heading"
         >
-          <h2 id="about-heading" className={styles.sectionHeading}>About Us</h2>
+          <h2 id="about-heading" className={styles.sectionHeading}>Win a FREE Whole House Outlet Update!</h2>
           <div className={styles.aboutContent}>
             <p>
-              My goal with my company is to provide trustworthy services for all customers so i can afford a lifestyle where i am able to spend quality time with friends and family.
+              Get a chance to upgrade your home's safety and value at no cost. We're giving away a complete, <b>whole house outlet update</b> to one lucky winner! To enter, simply type in your name and phone number. It's completely free to sign up. The winner will have every electrical outlet in their home updated at zero cost. <b>HUGE BONUS:</b> Everyone Who Enters Gets <b>15% OFF</b>! As a thank you for signing up, everyone who enters our giveaway will receive 15% off any other electrical work you have done with us. This offer is valid now until the week prior to Thanksgiving. Don't miss out on your chance to win a major upgrade and save on your next project!
             </p>
           </div>
         </section>
