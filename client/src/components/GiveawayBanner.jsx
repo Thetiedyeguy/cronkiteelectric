@@ -1,88 +1,41 @@
-// client/src/components/GiveawayBanner.jsx
 import React, { useEffect, useId, useRef, useState } from "react";
-import styles from "./GiveawayBanner.module.css";
-import api from '../apis/Giveaway'; // ⬅️ new import
+import styles from "./GiveawayBanner.module.css"; // re-use existing dialog/form styles
+import api from "../apis/Giveaway";
 
-const GiveawayBanner = ({
-  description = "Enter our monthly giveaway for a chance to win free service credit and merch!",
-  onSubmit, // still supported if you want to override
-}) => {
-  const [visible, setVisible] = useState(true);
-  const [open, setOpen] = useState(false);
-  const openBtnRef = useRef(null);
+const GiveawayModal = ({ open, onClose, onSubmit }) => {
   const titleId = useId();
-
-  useEffect(() => {
-    if (!open && openBtnRef.current) openBtnRef.current.focus();
-  }, [open]);
-
-  useEffect(() => {
-    if (!open) return;
-    const onKeyDown = (e) => e.key === "Escape" && setOpen(false);
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [open]);
-
-  if (!visible) return null;
+  if (!open) return null;
 
   return (
-    <>
-      <section className={styles.banner} aria-label="Giveaway announcement">
-        <p className={styles.text}>{description}</p>
-
-        <div className={styles.actions}>
-          <button
-            ref={openBtnRef}
-            type="button"
-            className={styles.cta}
-            onClick={() => setOpen(true)}
-          >
-            Enter Giveaway
-          </button>
-
-          <button
-            type="button"
-            className={styles.dismiss}
-            aria-label="Dismiss giveaway announcement"
-            onClick={() => setVisible(false)}
-          >
-            <span className={styles.closeIcon} aria-hidden="true">×</span>
-          </button>
-        </div>
-      </section>
-
-      {open && (
-        <Modal onClose={() => setOpen(false)} titleId={titleId}>
-          <GiveawayForm
-            titleId={titleId}
-            onClose={() => setOpen(false)}
-            // default submit uses axios client; still lets you pass a custom onSubmit if desired
-            onSubmit={
-              onSubmit ||
-              (async ({ name, phone }) => {
-                const resp = await api.post("/entry", { name, phone });
-                return { ok: resp.status >= 200 && resp.status < 300 };
-              })
-            }
-          />
-        </Modal>
-      )}
-    </>
+    <Modal onClose={onClose} titleId={titleId}>
+      <GiveawayForm
+        titleId={titleId}
+        onClose={onClose}
+        onSubmit={
+          onSubmit ||
+          (async ({ name, phone }) => {
+            const resp = await api.post("/entry", { name, phone });
+            return { ok: resp.status >= 200 && resp.status < 300 };
+          })
+        }
+      />
+    </Modal>
   );
 };
 
-export default GiveawayBanner;
+export default GiveawayModal;
 
-/* Modal + GiveawayForm stay the same EXCEPT the form no longer uses fetch.
-   In the form, you’re already calling onSubmit(entry) provided above. */
-
-
-/* ---------- Modal (inline for convenience) ---------- */
+/* ---------- Modal (unchanged behavior) ---------- */
 const Modal = ({ children, onClose, titleId }) => {
-  // Click overlay to close (but not clicks inside dialog)
   const onOverlayClick = (e) => {
     if (e.target === e.currentTarget) onClose();
   };
+
+  useEffect(() => {
+    const onKeyDown = (e) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [onClose]);
 
   return (
     <div className={styles.overlay} onMouseDown={onOverlayClick}>
@@ -98,19 +51,18 @@ const Modal = ({ children, onClose, titleId }) => {
   );
 };
 
-/* ---------- Form ---------- */
+/* ---------- Form (unchanged behavior) ---------- */
 const GiveawayForm = ({ titleId, onClose, onSubmit }) => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [status, setStatus] = useState({ type: "idle", message: "" });
   const nameInputRef = useRef(null);
 
-useEffect(() => {
+  useEffect(() => {
     if (nameInputRef.current) {
-        nameInputRef.current.focus();
+      nameInputRef.current.focus();
     }
-}, []);
-
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -126,12 +78,17 @@ useEffect(() => {
       if (onSubmit) {
         const res = await onSubmit(entry);
         if (res?.ok) {
-          setStatus({ type: "success", message: res.message || "You’re in! We’ll be in touch." });
+          setStatus({
+            type: "success",
+            message: res.message || "You’re in! We’ll be in touch.",
+          });
         } else {
-          setStatus({ type: "error", message: res?.message || "Submission failed. Try again." });
+          setStatus({
+            type: "error",
+            message: res?.message || "Submission failed. Try again.",
+          });
         }
       } else {
-        // Default: POST to a backend route you can implement
         const resp = await fetch("/api/giveaway-entry", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -200,18 +157,10 @@ useEffect(() => {
         )}
 
         <div className={styles.formActions}>
-          <button
-            type="button"
-            className={styles.secondary}
-            onClick={onClose}
-          >
+          <button type="button" className={styles.secondary} onClick={onClose}>
             Close
           </button>
-          <button
-            type="submit"
-            className={styles.primary}
-            disabled={status.type === "loading"}
-          >
+          <button type="submit" className={styles.primary} disabled={status.type === "loading"}>
             Submit
           </button>
         </div>

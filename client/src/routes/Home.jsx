@@ -1,37 +1,22 @@
 import React, { useState } from 'react';
 import ContactModal from '../components/ContactModal';
-import GiveawayBanner from "../components/GiveawayBanner";
+// import GiveawayBanner from "../components/GiveawayBanner"; // ⬅️ remove
+import GiveawayModal from '../components/GiveawayBanner'; // ⬅️ new
 import styles from './Home.module.css';
 import Reviews from './Reviews';
 import api from '../apis/Giveaway';
 
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const phoneNumber = '2097023370'; // Stored as string to prevent scrapers
+  const [isGiveawayOpen, setIsGiveawayOpen] = useState(false); // ⬅️ new
+  const phoneNumber = '2097023370';
   const email = 'sebastian@cronkiteelectric.co';
 
-  // Services data array for better maintainability
   const services = [
-    {
-      title: 'Additional power',
-      description: '',
-      icon: '⚡'
-    },
-    {
-      title: 'Panel Installation',
-      description: 'Expert electrical system upgrades',
-      icon: '🔌'
-    },
-    {
-      title: 'Troubleshooting',
-      description: '',
-      icon: '🔧'
-    },
-    {
-      title: 'Fixture Installation',
-      description: 'Energy-efficient designs',
-      icon: '💡'
-    }
+    { title: 'Additional power', description: '', icon: '⚡' },
+    { title: 'Panel Installation', description: 'Expert electrical system upgrades', icon: '🔌' },
+    { title: 'Troubleshooting', description: '', icon: '🔧' },
+    { title: 'Fixture Installation', description: 'Energy-efficient designs', icon: '💡' }
   ];
 
   const handlePhoneClick = () => {
@@ -49,10 +34,8 @@ const Home = () => {
 
   return (
     <div className={styles.container}>
-      <GiveawayBanner
-        description="Enter our giveaway for a chance to win a free outlet upgrade."
-        onSubmit={submitGiveaway}
-      />
+      {/* ⬇️ Giveaway banner removed */}
+
       {/* Schema markup for SEO */}
       <script type="application/ld+json">
         {JSON.stringify({
@@ -66,6 +49,7 @@ const Home = () => {
           "description": "Reliable professional electrical services"
         })}
       </script>
+
       <header className={styles.hero}>
         <div className={styles.heroContent}>
           <h1 className={styles.title}>Cronkite Electric</h1>
@@ -74,22 +58,30 @@ const Home = () => {
       </header>
 
       <main className={styles.mainContent}>
-        <section 
-          className={styles.aboutSection}
-          aria-labelledby="about-heading"
-        >
-          <h2 id="about-heading" className={styles.sectionHeading}>Win a FREE Whole House Outlet Update!</h2>
+        <section className={styles.aboutSection} aria-labelledby="about-heading">
+          <h2 id="about-heading" className={styles.sectionHeading}>
+            Win a FREE Whole House Outlet Update!
+          </h2>
           <div className={styles.aboutContent}>
             <p>
               Get a chance to upgrade your home's safety and value at no cost. We're giving away a complete, <b>whole house outlet update</b> to one lucky winner! To enter, simply type in your name and phone number. It's completely free to sign up. The winner will have every electrical outlet in their home updated at zero cost. <b>HUGE BONUS:</b> Everyone Who Enters Gets <b>15% OFF</b>! As a thank you for signing up, everyone who enters our giveaway will receive 15% off any other electrical work you have done with us. This offer is valid now until the week prior to Thanksgiving. Don't miss out on your chance to win a major upgrade and save on your next project!
             </p>
+
+            {/* ⬇️ New “Enter Giveaway” button here */}
+            <button
+              type="button"
+              className={styles.contactButton}
+              onClick={() => setIsGiveawayOpen(true)}
+              aria-haspopup="dialog"
+              aria-expanded={isGiveawayOpen}
+              aria-controls="giveaway-modal"
+            >
+              Enter Giveaway
+            </button>
           </div>
         </section>
 
-        <section 
-          className={styles.servicesSection}
-          aria-labelledby="services-heading"
-        >
+        <section className={styles.servicesSection} aria-labelledby="services-heading">
           <h2 id="services-heading" className={styles.sectionHeading}>Our Services</h2>
           <ul className={styles.servicesGrid}>
             {services.map((service, index) => (
@@ -101,31 +93,16 @@ const Home = () => {
           </ul>
         </section>
 
-        <section 
-          className={styles.contactSection}
-          aria-labelledby="contact-heading"
-        >
+        <section className={styles.contactSection} aria-labelledby="contact-heading">
           <h2 id="contact-heading" className={styles.sectionHeading}>Get in Touch</h2>
           <div className={styles.contactOptions}>
-            <button 
-              className={styles.contactButton}
-              onClick={handlePhoneClick}
-              aria-label="Call us"
-            >
+            <button className={styles.contactButton} onClick={handlePhoneClick} aria-label="Call us">
               <span role='img' aria-label='Phone'>📞</span> Call Us
             </button>
-            <button
-              className={styles.contactButton}
-              onClick={handleEmailClick}
-              aria-label="Email us"
-            >
+            <button className={styles.contactButton} onClick={handleEmailClick} aria-label="Email us">
               <span role='img' aria-label='Email'>✉️</span> Email Us
             </button>
-            <button 
-              className={styles.contactButton}
-              onClick={() => setIsModalOpen(true)}
-              aria-label="Request a quote"
-            >
+            <button className={styles.contactButton} onClick={() => setIsModalOpen(true)} aria-label="Request a quote">
               <span role='img' aria-label='Clipboard'>📋</span> Get Quote
             </button>
           </div>
@@ -141,7 +118,17 @@ const Home = () => {
         </p>
       </footer>
 
+      {/* Existing contact modal */}
       <ContactModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+
+      {/* New giveaway modal (same behavior as before) */}
+      <div id="giveaway-modal">
+        <GiveawayModal
+          open={isGiveawayOpen}
+          onClose={() => setIsGiveawayOpen(false)}
+          onSubmit={submitGiveaway}
+        />
+      </div>
     </div>
   );
 };
