@@ -33,7 +33,7 @@ const Header = () => {
                 className={styles.navLink}
                 onClick={handlePhoneClick}
                 aria-label="Call us"
-              >(209) 702-3370</Link>
+              >(209)702-3370</Link>
             </li>
             <li className={styles.navItem}>
               <Link
