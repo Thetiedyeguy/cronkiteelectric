@@ -178,48 +178,29 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-// SMS Gateway configuration
-const CARRIER_GATEWAY = process.env.CARRIER_GATEWAY; // e.g., @vtext.com
-const TARGET_PHONE = process.env.TARGET_PHONE; // Full number without formatting
-
-// Split message into SMS-friendly chunks
-function splitMessage(message) {
-  const MAX_LENGTH = 160;
-  const chunks = [];
-  
-  while (message.length > 0) {
-    let chunk = message.substring(0, MAX_LENGTH);
-    message = message.substring(MAX_LENGTH);
-    chunks.push(chunk);
-  }
-  
-  return chunks;
-}
+// Target email address
+const TARGET_EMAIL = process.env.TARGET_EMAIL;
 
 // API endpoint
 app.post('/api/send-message', express.json(), async (req, res) => {
   const { name, contact, message } = req.body;
-  console.log("Submitted")
+  console.log("Submitted");
 
   try {
-    // Honeypot check
-    
     // Validate input
     if (!name || !message || !contact) throw new Error('Missing required fields');
-    if (message.length > 1000) throw new Error('Message too long');
+    if (message.length > 5000) throw new Error('Message too long'); // optional larger limit
 
-    // Split message
-    const chunks = splitMessage(`Contact ${contact}\n: ${message}`);
-    
-    // Send each chunk as separate email
-    for (const [index, chunk] of chunks.entries()) {
-      await transporter.sendMail({
-        from: `"Website Contact" <${process.env.GMAIL_USER}>`,
-        to: `${TARGET_PHONE}${CARRIER_GATEWAY}`,
-        subject: index === 0 ? `New Message From ${name}` : `(Part ${index + 1})`,
-        text: chunk
-      });
-    }
+    // Construct full message
+    const fullMessage = `Name: ${name}\nContact: ${contact}\n\n${message}`;
+
+    // Send email
+    await transporter.sendMail({
+      from: `"Website Contact" <${process.env.GMAIL_USER}>`,
+      to: TARGET_EMAIL,
+      subject: `New Message from ${name}`,
+      text: fullMessage
+    });
 
     res.json({ success: true });
   } catch (error) {
@@ -227,4 +208,5 @@ app.post('/api/send-message', express.json(), async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
 
