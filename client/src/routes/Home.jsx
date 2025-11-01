@@ -78,7 +78,7 @@ const Home = () => {
               Enter Giveaway
             </button>
             <p>
-              Let's modernize your home with brand-new outlets. We're giving away a chance to win a <b>free</b> whole-house outlet update to a <b>lucky winner in the 209!</b> To enter, simply type in your name and phone number. <b>HUGE BONUS:</b> anyone who enters gets <b>15% off</b> other work. Don't miss out on your chance to win a major upgrade and save on your next project! Have family sign up on our behalf!
+              Let's modernize your home with brand-new outlets. We're giving away a chance to win a <b>free</b> whole-house outlet update to a <b>lucky winner in the 209!</b> To enter, simply type in your name and phone number. <b>HUGE BONUS:</b> anyone who enters gets <b>15% off</b> other work. Don't miss out on your chance to win a major upgrade and save on your next project! Have family sign up on your behalf!
             </p>
 
           </div>
