@@ -61,8 +61,11 @@ const Home = () => {
         <section className={styles.aboutSection} aria-labelledby="about-heading">
           <div className={styles.aboutContent}>
             <h2 id="about-heading" className={styles.sectionHeading}>
-              Win a FREE Whole House Outlet Update!
+              Stop living with old Outlets
             </h2>
+            <h3 className={styles.sectionSubheading}>
+              $2500 Value
+            </h3>
             {/* ⬇️ New “Enter Giveaway” button here */}
             <button
               type="button"
@@ -75,7 +78,7 @@ const Home = () => {
               Enter Giveaway
             </button>
             <p>
-              Get a chance to upgrade your home's safety and value at no cost. We're giving away a complete, <b>whole house outlet update</b> to one <b>lucky winner in the 209!</b> To enter, simply type in your name and phone number. It's completely free to sign up. The winner will have every electrical outlet in their home updated at zero cost. <b>HUGE BONUS:</b> Everyone Who Enters Gets <b>15% OFF</b>! As a thank you for signing up, everyone who enters our giveaway will receive 15% off any other electrical work you have done with us. This offer is valid now until the week prior to Thanksgiving. Don't miss out on your chance to win a major upgrade and save on your next project!
+              Let's modernize your home with brand-new outlets. We're giving away a chance to win a free <b>whole-house outlet update</b> to a <b>lucky winner in the 209!</b> To enter, simply type in your name and phone number. <b>HUGE BONUS:</b> anyone who enters gets <b>15% off</b> other work. Don't miss out on your chance to win a major upgrade and save on your next project! Have family sign up on our behalf!
             </p>
 
           </div>

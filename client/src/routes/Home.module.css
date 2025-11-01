@@ -45,19 +45,26 @@
 .sectionHeading {
   font-size: 2rem;
   color: #2d3748;
+  text-align: center;
+  position: relative;
+}
+
+.sectionSubheading {
+  font-size: 1.5rem;
+  color: #2d3748;
   margin-bottom: 2rem;
   text-align: center;
   position: relative;
   padding-bottom: 0.5rem;
 }
 
-.sectionHeading::after {
+.sectionSubheading::after {
   content: '';
   position: absolute;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 100px;
+  width: 75%;
   height: 3px;
   background-color: #4299e1;
 }
