@@ -37,7 +37,7 @@
 
 .tagline {
   font-size: 1.5rem;
-    font-weight: 250;
+  font-weight: 250;
   color: #c4a500;
 }
 
@@ -79,8 +79,8 @@
   max-width: 650px;
   justify-items: center;
   margin: 0 auto;
-  padding-left: 20px;   /* minimum "margin" */
-  padding-right: 20px;  /* minimum "margin" */
+  padding-left: 20px;
+  padding-right: 20px;
   line-height: 1.6;
   font-size: 1.1rem;
   color: #4a5568;
@@ -112,41 +112,113 @@
   background-color: #4299e1;
 }
 
-.servicesGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  padding: 0 1rem;
-  list-style: none;
+.servicesSection .sectionHeading {
+  color: #fff;
+  margin-bottom: 2rem;
 }
 
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  padding: 0 2rem;
+  list-style: none;
+  margin: 0;
+}
+
+/* Last two cards centered on their row */
+.servicesGrid li:nth-child(4) {
+  grid-column: 1 / 2;
+  margin-left: auto;
+  width: 100%;
+}
+
+.servicesGrid li:nth-child(5) {
+  grid-column: 2 / 3;
+  width: 100%;
+}
+
+/* Image-background service cards */
 .serviceCard {
-  background: white;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  transition: transform 0.2s;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  overflow: hidden;
+  min-height: 260px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  display: flex;
+  align-items: flex-end;
 }
 
 .serviceCard:hover {
-  transform: translateY(-5px);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.serviceCard:hover .serviceOverlay {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.3) 60%, rgba(0, 0, 0, 0.1) 100%);
+}
+
+.serviceCard:hover .serviceCardCta {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Dark gradient overlay */
+.serviceOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.2) 55%, rgba(0, 0, 0, 0.05) 100%);
+  transition: background 0.25s ease;
+  border-radius: 12px;
+}
+
+/* Text content sitting above overlay */
+.serviceCardContent {
+  position: relative;
+  z-index: 1;
+  padding: 1.5rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
 }
 
 .serviceIcon {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+  font-size: 2rem;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
 }
 
 .serviceTitle {
-  font-size: 1.25rem;
-  color: #2d3748;
-  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+  color: #ffffff;
+  margin: 0;
+  font-weight: 700;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
 }
 
 .serviceDescription {
-  color: #718096;
-  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.9rem;
+  margin: 0;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  line-height: 1.4;
+}
+
+.serviceCardCta {
+  display: inline-block;
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #7ec8f7;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  letter-spacing: 0.02em;
 }
 
 /* Emergency Section */
@@ -201,6 +273,21 @@
   background-color: #4299e1;
   color: white;
   padding: 1rem 2rem;
+  margin: auto;
+  border: none;
+  border-radius: 40px;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+}
+
+.contactButtons {
+  background-color: #4299e1;
+  color: white;
+  padding: 1rem 2rem;
   border: none;
   border-radius: 40px;
   font-size: 1rem;
@@ -244,7 +331,14 @@
   }
 
   .servicesGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    padding: 0 1rem;
+  }
+
+  .servicesGrid li:nth-child(4),
+  .servicesGrid li:nth-child(5) {
+    grid-column: auto;
+    margin-left: 0;
   }
 
   .sectionHeading {
@@ -273,6 +367,14 @@
 
   .emergencyHeading {
     font-size: 1.25rem;
+  }
+
+  .servicesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .serviceCard {
+    min-height: 200px;
   }
 }
 

@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import {Link } from 'react-router-dom';
 import styles from './Header.module.css';
 import ContactModal from './ContactModal';
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const location = useLocation();
-  const phoneNumber = '2097023370';
+  const [open, setOpen] = useState(false);
+  const [servicesHover, setServicesHover] = useState(false);
 
-  const handlePhoneClick = () => {
-    window.location.href = `tel:${phoneNumber}`;
-  };
+  const services = [
+    { title: 'Emergency Repair & Troubleshooting', path: '/emergency-repair' },
+    { title: 'Fan & Lighting Installation', path: '/fans-lighting' },
+    { title: 'Panel Updates', path: '/services' },
+    { title: 'Level Two Charger Installation', path: '/level-2-charger' },
+    { title: 'Rewire & Outlet Updates', path: '/services' }
+  ];
+
 
   return (
     <header className={styles.header}>
@@ -28,44 +33,68 @@ const Header = () => {
         {/* Navigation */}
         <nav className={styles.nav} aria-label="Main navigation">
           <ul className={styles.navList}>
-            <li className={styles.navItem}>
-              <Link 
-                className={styles.navLink}
-                onClick={handlePhoneClick}
-                aria-label="Call us"
-              >(209)702-3370</Link>
-            </li>
-            <li className={styles.navItem}>
-              <Link
-                to="/services"
-                className={`${styles.navLink} ${
-                  location.pathname === '/services' ? styles.active : ''
-                }`}
-                aria-current={location.pathname === '/services' ? 'page' : undefined}
+            <div
+                className={styles.dropdown}
               >
-                Services
-              </Link>
-            </li>
-            <li className={styles.navItem}>
-              <Link
-                to="/about"
-                className={`${styles.navLink} ${
-                  location.pathname === '/about' ? styles.active : ''
-                }`}
-                aria-current={location.pathname === '/about' ? 'page' : undefined}
-              >
-                About
-              </Link>
-            </li>
-            <li className={styles.navItem}>
-              <button
-                className={styles.navButton}
-                onClick={() => setIsModalOpen(true)}
-                aria-label="Open contact form"
-              >
-                Contact
-              </button>
-            </li>
+                <p
+                  className={styles.hamburger}
+                  onMouseDown={() => setOpen(!open)}
+                >
+                  {open ? '✗' : '☰'}
+                </p>
+
+                {open && (
+                  <div className={styles.dropdownMenu}>
+                      <Link
+                        key="home"
+                        to="/"
+                        className={styles.dropdownItem}
+                        onClick={() => setOpen(false)}
+                      >
+                        Home
+                      </Link>
+                      <div 
+                        className={styles.servicesContainer}
+                        onMouseEnter={() => setServicesHover(true)}
+                        onMouseLeave={() => setServicesHover(false)}
+                      >
+                        <Link
+                          key="services"
+                          to="/services"
+                          className={styles.dropdownItem}
+                          onClick={() => setOpen(false)}
+                        >
+                          Services
+                        </Link>
+                        {servicesHover && (
+                          <div className={styles.servicesSubmenu}>
+                            {services.map((service, index) => (
+                              <Link
+                                key={index}
+                                to={service.path}
+                                className={styles.submenuItem}
+                                onClick={() => {
+                                  setOpen(false);
+                                  setServicesHover(false);
+                                }}
+                              >
+                                {service.title}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                      <Link
+                        key="about"
+                        to="/about"
+                        className={styles.dropdownItem}
+                        onClick={() => setOpen(false)}
+                      >
+                        About
+                      </Link>
+                  </div>
+                )}
+              </div>
           </ul>
         </nav>
       </div>
