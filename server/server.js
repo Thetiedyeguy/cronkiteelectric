@@ -137,7 +137,8 @@ app.get('/api/reviews', async (req, res) => {
       reviewsFetchPromise = axios.get(url, {
         headers: {
           'X-Goog-Api-Key': apiKey,
-          'X-Goog-FieldMask': 'reviews' // request only what you need
+          // limit fields to those we actually use; "reviews.time" isn't valid
+          'X-Goog-FieldMask': 'reviews.authorAttribution.photoUri,reviews.authorAttribution.displayName,reviews.rating,reviews.text' 
         },
         timeout: 10000
       })

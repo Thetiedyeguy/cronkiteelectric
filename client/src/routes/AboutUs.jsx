@@ -6,80 +6,52 @@ import { useState } from 'react';
 const AboutUs = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const strengths = [
-    { 
-      icon: '⚡', 
-      title: 'Direct Owner Involvement', 
-      text: 'Every job receives my personal attention from estimate to completion'
-    },
-    { 
-      icon: '📅', 
-      title: 'Flexible Scheduling', 
-      text: 'Available for emergency calls and after-hours service'
-    },
-    { 
-      icon: '🎓', 
-      title: 'Code enforced installs', 
-      text: '2023 Certified Electrical Safety Professional (CESCP)'
-    },
-    { 
-      icon: '🏡', 
-      title: 'Community Focused', 
-      text: 'Serving Central Valley residents with local expertise'
-    }
-  ];
-
   return (
     <section className={styles.aboutSection} aria-labelledby="about-heading">
       <div className={styles.container}>
-        <h2 id="about-heading" className={styles.sectionHeading}>
-          Personal Service, Modern Expertise
-        </h2>
+        <div className={styles.content}>
+          <h1 id="about-heading" className={styles.sectionHeading}>
+            At Cronkite Electric, we believe that reliable power is the backbone of a safe and functional home.
+          </h1>
 
-        <div className={styles.profileSection}>
-          <img 
-            src="/fixing a fan.jpg" 
-            alt="Sebastian Cronkite - Owner & Master Electrician" 
-            className={styles.profileImage}
-          />
-          <div className={styles.profileContent}>
-            <h3 className={styles.tagline}>
-              Hi, I'm Sebastian - Your Trusted Local Electrician
-            </h3>
-            <p className={styles.bio}>
-              Founded in 2023, Cronkite Electric brings fresh expertise to California's Central Valley. 
-              As a solo practitioner, I combine up-to-date electrical certifications with old-fashioned 
-              personal service. When you call Cronkite Electric, you're getting:
-            </p>
-            
-            <ul className={styles.commitmentList}>
-              <li>Direct communication with the business owner</li>
-              <li>Same-day quotes for urgent needs</li>
-              <li>personalized attention to your project</li>
-            </ul>
-          </div>
-        </div>
-
-        <div className={styles.strengthsGrid}>
-          {strengths.map((item, index) => (
-            <div key={index} className={styles.strengthCard}>
-              <div className={styles.strengthIcon}>{item.icon}</div>
-              <h4 className={styles.strengthTitle}>{item.title}</h4>
-              <p className={styles.strengthText}>{item.text}</p>
-            </div>
-          ))}
-        </div>
-
-        <div className={styles.ctaSection}>
-          <p className={styles.ctaText}>
-            Why work with a big company when you can get personal service from a 
-            licensed professional? Let's discuss your electrical needs.
+          <p className={styles.intro}>
+            Founded in 2023 and based in Modesto, we are a locally owned and operated electrical contracting business dedicated to providing the Central Valley and the Bay Area with elite technical expertise and a "customer-first" philosophy.
           </p>
+
+          <h2 className={styles.subheading}>Experience You Can Trust</h2>
+          <p>
+            When you hire an electrician, you aren't just paying for a service—you're investing in the safety of your property. Our founder is a C-10 licensed electrical contractor with over 7 years of hands-on experience in the field.
+          </p>
+          <p>
+            We understand that electrical issues can be stressful. That's why we've built Cronkite Electric on a foundation of transparency, clear communication, and high-quality craftsmanship. Whether it's a complex panel upgrade or a simple outlet repair, we treat every project with the same level of precision and respect.
+          </p>
+
+          <h2 className={styles.subheading}>Why Choose Us?</h2>
+          <ul className={styles.featuresList}>
+            <li>
+              <strong>Licensed & Professional:</strong> We carry a full C-10 license, ensuring that every job meets California's strict building codes and safety standards.
+            </li>
+            <li>
+              <strong>Local Expertise:</strong> Serving both the Central Valley and the Bay Area, we are familiar with the specific needs of homeowners in our community—from Modesto to the coast.
+            </li>
+            <li>
+              <strong>Direct Accountability:</strong> As a focused, owner-operated business, you get the benefit of working directly with the expert. No middleman, no "big-box" overhead—just direct, honest service.
+            </li>
+          </ul>
+
+          <h2 className={styles.subheading}>Our Mission</h2>
+          <p>
+            Our goal is simple: to provide high-value electrical solutions that stand the test of time. We don't just fix wires; we build long-term relationships with our clients through reliable work and "Grand Slam" service that exceeds expectations.
+          </p>
+          <p className={styles.finalCta}>
+            Ready to power up your next project? Whether you're looking for a whole-house update or need a quick repair, we're here to help.
+          </p>
+
           <button 
             className={styles.ctaButton}
             onClick={() => setIsModalOpen(true)}
           >
-            Get Free Unchanging Estimates
+            Get in Touch
           </button>
         </div>
       </div>

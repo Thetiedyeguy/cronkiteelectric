@@ -8,6 +8,8 @@ import GiveawayEntries from './routes/GiveawayEntries';
 import EmergencyRepair from './routes/EmergencyRepair';
 import FansLighting from './routes/FansLighting';
 import Level2Charger from './routes/Level2Charger';
+import PanelUpgrades from './routes/PanelUpgrades';
+import RewireOutlets from './routes/RewireOutlets';
 import Callus from './components/Callus';
 
 const App = () => {
@@ -23,6 +25,8 @@ const App = () => {
                 <Route path='/emergency-repair' element={<EmergencyRepair/>}/>
                 <Route path='/fans-lighting' element={<FansLighting/>}/>
                 <Route path='/level-2-charger' element={<Level2Charger/>}/>
+                <Route path='/panel-upgrades' element={<PanelUpgrades/>}/>
+                <Route path='/rewire-outlets' element={<RewireOutlets/>}/>
             </Routes>
         </Router>
         <Callus/>

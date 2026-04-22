@@ -77,13 +77,20 @@
 
 .aboutContent {
   max-width: 650px;
-  justify-items: center;
   margin: 0 auto;
   padding-left: 20px;
   padding-right: 20px;
   line-height: 1.6;
   font-size: 1.1rem;
   color: #4a5568;
+  text-align: center;
+}
+
+.aboutContent .highlight {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #c53030;
+  margin: 0.5rem 0 1rem 0;
 }
 
 .actions {
@@ -151,6 +158,16 @@
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
   display: flex;
   align-items: flex-end;
+}
+
+/* Specific positioning for Level Two Charger card */
+.servicesGrid li:nth-child(4) .serviceCard {
+  background-position: center center;
+}
+
+/* Specific positioning for Fan & Lighting card */
+.servicesGrid li:nth-child(2) .serviceCard {
+  background-position: center bottom;
 }
 
 .serviceCard:hover {
@@ -265,6 +282,7 @@
 .contactOptions {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 1.5rem;
   flex-wrap: wrap;
 }

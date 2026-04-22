@@ -11,9 +11,9 @@ const Header = () => {
   const services = [
     { title: 'Emergency Repair & Troubleshooting', path: '/emergency-repair' },
     { title: 'Fan & Lighting Installation', path: '/fans-lighting' },
-    { title: 'Panel Updates', path: '/services' },
+    { title: 'Panel Updates', path: '/panel-upgrades' },
     { title: 'Level Two Charger Installation', path: '/level-2-charger' },
-    { title: 'Rewire & Outlet Updates', path: '/services' }
+    { title: 'Rewire & Outlet Updates', path: '/rewire-outlets' }
   ];
 
 

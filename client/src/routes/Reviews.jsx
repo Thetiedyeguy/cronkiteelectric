@@ -14,7 +14,8 @@ const Reviews = ({label = 'Warning'}) => {
     try {
       setIsLoading(true);
       setError(null);
-      const response = await ReviewFinder.get('/');
+      // include refresh query so server bypasses cache on first load
+      const response = await ReviewFinder.get('/?refresh=1');
       setReviews(response.data || []);
     } catch (err) {
       setError(err.message || 'Failed to load reviews');
@@ -50,6 +51,10 @@ const Reviews = ({label = 'Warning'}) => {
                         alt={`${review.authorAttribution.displayName}'s avatar`}
                         className={styles.avatar}
                         loading="lazy"
+                        onError={(e) => {
+                          console.error('avatar failed to load', review.authorAttribution.photoUri);
+                          e.target.style.display = 'none';
+                        }}
                       />
                     ) : (
                       <span className={styles.defaultAvatar} role="img" aria-label={label}>👤</span>

@@ -49,6 +49,10 @@ const Home = () => {
       navigate('/fans-lighting');
     } else if (serviceTitle === 'Level Two Charger Installation') {
       navigate('/level-2-charger');
+    } else if (serviceTitle === 'Panel Updates') {
+      navigate('/panel-upgrades');
+    } else if (serviceTitle === 'Rewire & Outlet Updates') {
+      navigate('/rewire-outlets');
     } else {
       setSelectedService(serviceTitle);
       setIsModalOpen(true);
@@ -82,10 +86,13 @@ const Home = () => {
         <section className={styles.aboutSection} aria-labelledby="about-heading">
           <div className={styles.aboutContent}>
             <h2 id="about-heading" className={styles.sectionHeading}>
-              Professional Electrical Services
+              Your Local C-10 Electrical Contractor
             </h2>
+            <p className={styles.highlight}>
+              Licensed, Insured, & Bonded
+            </p>
             <p>
-              Cronkite Electric provides reliable, professional electrical services for residential and commercial properties. From emergency repairs to complete installations, we ensure your electrical systems are safe and up to code.
+              Central Valley Electrician you deserve. With every job comes a <strong>2 year warranty</strong> and <strong>upfront, fair pricing</strong> with no hidden costs.
             </p>
           </div>
         </section>
