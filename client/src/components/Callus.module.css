@@ -11,3 +11,10 @@
     font-weight: bold;
     font-size: 2rem;
 }
+
+@media (max-width: 768px) {
+  .callus {
+    font-size: 1rem;
+    padding: 10px 14px;
+  }
+}

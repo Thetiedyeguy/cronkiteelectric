@@ -38,7 +38,7 @@ const Header = () => {
               >
                 <p
                   className={styles.hamburger}
-                  onMouseDown={() => setOpen(!open)}
+                  onMouseDown={() => { if (open) setServicesHover(false); setOpen(!open); }}
                 >
                   {open ? '✗' : '☰'}
                 </p>
@@ -53,30 +53,28 @@ const Header = () => {
                       >
                         Home
                       </Link>
-                      <div 
-                        className={styles.servicesContainer}
-                        onMouseEnter={() => setServicesHover(true)}
-                        onMouseLeave={() => setServicesHover(false)}
-                      >
-                        <Link
-                          key="services"
-                          to="/services"
+                      <div className={styles.servicesContainer}>
+                        <div
                           className={styles.dropdownItem}
-                          onClick={() => setOpen(false)}
+                          onClick={() => setServicesHover(!servicesHover)}
                         >
-                          Services
-                        </Link>
+                          Services {servicesHover ? '▴' : '▾'}
+                        </div>
                         {servicesHover && (
                           <div className={styles.servicesSubmenu}>
+                            <Link
+                              to="/services"
+                              className={styles.submenuItem}
+                              onClick={() => { setOpen(false); setServicesHover(false); }}
+                            >
+                              All Services
+                            </Link>
                             {services.map((service, index) => (
                               <Link
                                 key={index}
                                 to={service.path}
                                 className={styles.submenuItem}
-                                onClick={() => {
-                                  setOpen(false);
-                                  setServicesHover(false);
-                                }}
+                                onClick={() => { setOpen(false); setServicesHover(false); }}
                               >
                                 {service.title}
                               </Link>
