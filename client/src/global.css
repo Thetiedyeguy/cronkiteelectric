@@ -1,5 +1,10 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 html {
     font-size: 18px;
+    overflow-x: hidden;
   }
 
 @font-face {
@@ -16,6 +21,12 @@ html {
     padding: 0;
     line-height: 1.5;
     color: #333;
-    padding-top: 10rem;
+    padding-top: calc(6rem + 12px); /* clears fixed header: 4rem logo + 2rem padding + border + buffer */
+  }
+
+  @media (max-width: 768px) {
+    body {
+      padding-top: calc(50px + 2rem + 10px); /* mobile header: 50px logo + 2rem padding + border + buffer */
+    }
   }
   

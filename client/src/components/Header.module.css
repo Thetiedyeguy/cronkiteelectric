@@ -166,7 +166,7 @@
 /* Dropdown container */
 .dropdownMenu {
   position: fixed;
-  top: 114px;
+  top: calc(6rem + 3px); /* matches header: 4rem logo + 2rem padding + border */
   right: 0;
   background-color: #1269a1;
   z-index: 999;
@@ -177,7 +177,7 @@
 
 @media (max-width: 768px) {
   .dropdownMenu {
-    top: 98px;
+    top: calc(50px + 2rem + 3px); /* mobile header: 50px logo + 2rem padding + border */
     left: 0;
     right: 0;
     border-radius: 0 0 6px 6px;
