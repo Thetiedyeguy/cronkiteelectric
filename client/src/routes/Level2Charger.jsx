@@ -19,26 +19,6 @@ const Level2Charger = () => {
           </p>
         </section>
 
-        <section className={styles.serviceSection}>
-          <h2>Charging Options</h2>
-          <div className={styles.chargingTable}>
-            <div className={styles.chargingOption}>
-              <h3>Level 1</h3>
-              <p className={styles.power}>~1.9kW</p>
-              <p className={styles.cost}>$11.5 cents per hour</p>
-              <p className={styles.speed}>3-5 miles per hour</p>
-              <p className={styles.time}>40-60 hours full charge</p>
-            </div>
-            <div className={styles.chargingOption}>
-              <h3>Level 2</h3>
-              <p className={styles.power}>~19.2kW</p>
-              <p className={styles.cost}>$25-45 per hour</p>
-              <p className={styles.speed}>25-45 miles per hour</p>
-              <p className={styles.time}>6-9 hours full charge</p>
-            </div>
-          </div>
-        </section>
-
         <section className={styles.contactSection}>
           <h2>Get Your EV Charger Installed Today</h2>
           <p>Contact us for professional Level 2 charger installation services.</p>

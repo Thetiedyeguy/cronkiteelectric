@@ -11,11 +11,13 @@ import Level2Charger from './routes/Level2Charger';
 import PanelUpgrades from './routes/PanelUpgrades';
 import RewireOutlets from './routes/RewireOutlets';
 import Callus from './components/Callus';
+import ScrollToTop from './utils/ScrollToTop';
 
 const App = () => {
   return (
     <div className="container">
         <Router>
+            <ScrollToTop />
             <Header />
             <Routes>
                 <Route path="/" element={<Home />} />

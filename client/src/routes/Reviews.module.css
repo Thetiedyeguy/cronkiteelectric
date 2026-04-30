@@ -29,6 +29,12 @@
   background-color: #4299e1;
 }
 
+.iframeWrapper {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
 .reviewsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));

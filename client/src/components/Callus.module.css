@@ -1,7 +1,7 @@
 .callus {
     position: fixed;
     bottom: 20px;
-    right: 20px;
+    left: 20px;
     z-index: 9999;
     text-decoration: none;
     background: rgba(18, 105, 161, 0.82);

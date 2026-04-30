@@ -8,6 +8,10 @@ const AboutUs = () => {
 
   return (
     <section className={styles.aboutSection} aria-labelledby="about-heading">
+      <div className={styles.heroBanner} style={{ backgroundImage: "url('/company car.jpg')" }}>
+        <div className={styles.heroBannerOverlay} />
+        <h2 className={styles.heroBannerText}>About Cronkite Electric</h2>
+      </div>
       <div className={styles.container}>
         <div className={styles.content}>
           <h1 id="about-heading" className={styles.sectionHeading}>

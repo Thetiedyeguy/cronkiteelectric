@@ -1,6 +1,36 @@
 .aboutSection {
-  padding: 4rem 1rem;
+  padding: 0 0 4rem 0;
   background: #ffffff;
+}
+
+.heroBanner {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.heroBannerOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.6) 100%);
+}
+
+.heroBannerText {
+  position: relative;
+  z-index: 1;
+  color: #ffffff;
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  text-align: center;
+  margin: 0;
+  padding: 0 1rem;
 }
 
 .container {
@@ -84,6 +114,14 @@
 }
 
 @media (max-width: 768px) {
+  .heroBanner {
+    height: 200px;
+  }
+
+  .heroBannerText {
+    font-size: 1.8rem;
+  }
+
   .sectionHeading {
     font-size: 2rem;
   }

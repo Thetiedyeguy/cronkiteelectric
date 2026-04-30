@@ -1,87 +1,22 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React from 'react';
 import styles from './Reviews.module.css';
-import ReviewFinder from '../apis/ReviewFinder';
-import LoadingSpinner from '../components/LoadingSpinner';
-import ErrorBanner from '../components/ErrorBanner';
-import StarRating from '../utils/StarRating';
 
-const Reviews = ({label = 'Warning'}) => {
-  const [reviews, setReviews] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  const fetchReviews = useCallback(async () => {
-    try {
-      setIsLoading(true);
-      setError(null);
-      // include refresh query so server bypasses cache on first load
-      const response = await ReviewFinder.get('/?refresh=1');
-      setReviews(response.data || []);
-    } catch (err) {
-      setError(err.message || 'Failed to load reviews');
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchReviews();
-  }, [fetchReviews]);
-
+const Reviews = () => {
   return (
     <section className={styles.reviewsSection} aria-labelledby="reviews-heading">
       <div className={styles.container}>
         <h2 id="reviews-heading" className={styles.sectionHeading}>
           Customer Reviews
         </h2>
-
-        {isLoading ? (
-          <LoadingSpinner />
-        ) : error ? (
-          <ErrorBanner message={error} onRetry={fetchReviews} />
-        ) : reviews.length > 0 ? (
-          <div className={styles.reviewsGrid}>
-            {reviews.map((review, index) => (
-              <article key={index} className={styles.reviewCard}>
-                <div className={styles.authorSection}>
-                  <div className={styles.avatarContainer}>
-                    {review.authorAttribution?.photoUri ? (
-                      <img
-                        src={review.authorAttribution.photoUri}
-                        alt={`${review.authorAttribution.displayName}'s avatar`}
-                        className={styles.avatar}
-                        loading="lazy"
-                        onError={(e) => {
-                          console.error('avatar failed to load', review.authorAttribution.photoUri);
-                          e.target.style.display = 'none';
-                        }}
-                      />
-                    ) : (
-                      <span className={styles.defaultAvatar} role="img" aria-label={label}>👤</span>
-                    )}
-                  </div>
-                  <div className={styles.authorInfo}>
-                    <h3 className={styles.authorName}>
-                      {review.authorAttribution?.displayName || 'Anonymous'}
-                    </h3>
-                    <p className={styles.reviewDate}>
-                      {review.relativePublishTimeDescription}
-                    </p>
-                  </div>
-                </div>
-                <div className={styles.ratingContainer}>
-                  <StarRating rating={review.rating} />
-                  <span className={styles.ratingValue}>({review.rating}/5)</span>
-                </div>
-                <p className={styles.reviewText}>
-                  {review.text?.text || 'No review text provided.'}
-                </p>
-              </article>
-            ))}
-          </div>
-        ) : (
-          <p className={styles.noReviews}>No reviews available at the moment.</p>
-        )}
+        <div className={styles.iframeWrapper}>
+          <iframe
+            src="https://client.housecallpro.com/reviews/widget/debd6e42-59c9-4978-9254-a26abd62587d"
+            height="1000"
+            width="100%"
+            title="Customer Reviews"
+            style={{ border: 'none', display: 'block' }}
+          />
+        </div>
       </div>
     </section>
   );
