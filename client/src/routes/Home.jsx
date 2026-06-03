@@ -142,7 +142,7 @@ const Home = () => {
       <footer className={styles.footer}>
         <p className={styles.footerText}>
           &copy; {new Date().getFullYear()} Cronkite Electric. All rights reserved.<br />
-          License #113063 | Fully Insured
+          License #1113063 | Fully Insured
         </p>
       </footer>
 
